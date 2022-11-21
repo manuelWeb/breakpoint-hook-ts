@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useViewport from './useViewport';
 
 const ResponsiveComponent = () => {
-  const [width, setWidth] = useState(window.innerWidth)
-  const breakpoint = 620;
-
-  useEffect(() => {
-    const handleWidowResize = () => setWidth(window.innerWidth)
-    window.addEventListener('resize', handleWidowResize)
-
-    // rm listener componentWillUnmount
-    return (() => { window.removeEventListener('resize', handleWidowResize) })
-
-  }, [])
+  const { width } = useViewport();
+  const breakpoint = 620
 
   return (
     width < breakpoint ? <Mobile /> : <Desktop />

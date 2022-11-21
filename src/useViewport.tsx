@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useViewport = () => {
   const [width, setWidth] = useState(window.innerWidth)
@@ -10,9 +10,9 @@ const useViewport = () => {
     // rm listener componentWillUnmount
     return (() => { window.removeEventListener('resize', handleWidowResize) })
 
-  }, [])
+  }, [width])
 
-  return width
+  return { width }
 
 };
 
