@@ -6,9 +6,7 @@ const breakpoints: any = {
   lg: 1000,
   xl: 1100,
 }
-function isGreaterThan(window: number, bp: number): boolean {
-  return window <= bp
-}
+
 const useViewport = () => {
   const [width, setWidth] = useState(window.innerWidth)
   const [currBp, setCurrBp] = useState<null | string>(null)
@@ -23,18 +21,11 @@ const useViewport = () => {
    * transform window.innerWidth to breakpoints string
    */
   useEffect(() => {
-    if (isGreaterThan(width, breakpoints.xl)) {
-      setCurrBp('xl')
-    } else if (isGreaterThan(width, breakpoints.lg)) {
-      setCurrBp('lg')
-    } else if (isGreaterThan(width, breakpoints.md)) {
-      setCurrBp('md')
-    } else if (isGreaterThan(width, breakpoints.sm)) {
-      setCurrBp('sm')
-    } else if (isGreaterThan(width, breakpoints.xs)) {
-      setCurrBp('xs')
-    } else {
-      setCurrBp('xxlarge')
+    for (const key in breakpoints) {
+      if (width < breakpoints[key]) {
+        setCurrBp(key)
+        break
+      } else { setCurrBp('xxlarge') }
     }
   }, [width])
 
